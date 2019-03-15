@@ -29,7 +29,7 @@ void __fastcall TForm1::rightUpTimerTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::rightDownTimerTimer(TObject *Sender)
 {
-        if(rightPaddle -> Top + 100 < background -> Height - 10)
+        if(rightPaddle -> Top + 110 < background -> Height)
                 rightPaddle -> Top += 10;
 }
 //---------------------------------------------------------------------------
