@@ -24,12 +24,12 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 
 void __fastcall TForm1::rightUpTimerTimer(TObject *Sender)
 {
-       if(rightPaddle -> Top > 10) rightPaddle -> Top -= 10;
+       if(rightPaddle -> Top > 1) rightPaddle -> Top -= 10;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::rightDownTimerTimer(TObject *Sender)
 {
-        if(rightPaddle -> Top + 100 < background -> Height - 10)
+        if(rightPaddle -> Top + 110 < background -> Height)
                 rightPaddle -> Top += 10;
 }
 //---------------------------------------------------------------------------
@@ -74,14 +74,14 @@ void __fastcall TForm1::FormResize(TObject *Sender)
 
 void __fastcall TForm1::leftDownTimer(TObject *Sender)
 {
-        if(leftPaddle -> Top + 100 < background -> Height - 10)
+        if(leftPaddle -> Top + 110 <= background -> Height)
                 leftPaddle -> Top += 10;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::leftUpTimer(TObject *Sender)
 {
-        if(leftPaddle -> Top > 10) leftPaddle -> Top -= 10;
+        if(leftPaddle -> Top >= 10) leftPaddle -> Top -= 10;
 }
 //---------------------------------------------------------------------------
 

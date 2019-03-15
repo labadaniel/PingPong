@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 316
-  Top = 112
+  Left = 450
+  Top = 253
   Width = 1239
   Height = 611
   Align = alCustom
-  Caption = 'Form1'
+  Caption = 'PingPong by Daniel Laba'
   Color = clGray
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -229,6 +229,7 @@ object Form1: TForm1
       1E17291E17291E17291E17291E17291E17291E17291EFFFFFF17291E17291E17
       291E17291E17291E17291E17291E17291E17291E17291E17291E17291E17291E
       17291E17291E17291E17291E17291EFFFFFF}
+    Transparent = True
   end
   object leftPaddle: TImage
     Left = 0
