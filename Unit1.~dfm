@@ -1,10 +1,10 @@
 object Form1: TForm1
-  Left = 211
-  Top = 135
-  Width = 886
-  Height = 464
+  Left = 450
+  Top = 253
+  Width = 1239
+  Height = 611
   Align = alCustom
-  Caption = 'Form1'
+  Caption = 'PingPong by Daniel Laba'
   Color = clGray
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,15 +19,15 @@ object Form1: TForm1
   OnKeyUp = FormKeyUp
   OnResize = FormResize
   DesignSize = (
-    870
-    425)
+    1223
+    572)
   PixelsPerInch = 96
   TextHeight = 13
   object background: TShape
     Left = 0
     Top = 0
-    Width = 870
-    Height = 425
+    Width = 1223
+    Height = 572
     Align = alClient
     Brush.Color = clGray
   end
@@ -229,6 +229,7 @@ object Form1: TForm1
       1E17291E17291E17291E17291E17291E17291E17291EFFFFFF17291E17291E17
       291E17291E17291E17291E17291E17291E17291E17291E17291E17291E17291E
       17291E17291E17291E17291E17291EFFFFFF}
+    Transparent = True
   end
   object leftPaddle: TImage
     Left = 0
@@ -442,5 +443,19 @@ object Form1: TForm1
     OnTimer = rightUpTimerTimer
     Left = 712
     Top = 104
+  end
+  object leftDown: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = leftDownTimer
+    Left = 96
+    Top = 16
+  end
+  object leftUp: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = leftUpTimer
+    Left = 40
+    Top = 16
   end
 end

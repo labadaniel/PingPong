@@ -20,6 +20,7 @@ __published:	// IDE-managed Components
         TTimer *rightUp;
         TTimer *leftDown;
         TTimer *leftUp;
+        TImage *ball;
         void __fastcall rightUpTimerTimer(TObject *Sender);
         void __fastcall rightDownTimerTimer(TObject *Sender);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
