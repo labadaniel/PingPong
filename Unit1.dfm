@@ -1,11 +1,12 @@
 object Form1: TForm1
-  Left = 245
-  Top = 170
+  Left = 105
+  Top = 135
   Width = 1239
   Height = 611
-  Align = alCustom
   Caption = 'PingPong by Daniel Laba'
   Color = clGray
+  UseDockManager = True
+  DockSite = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -32,8 +33,8 @@ object Form1: TForm1
     Brush.Color = clGray
   end
   object rightPaddle: TImage
-    Left = 773
-    Top = 0
+    Left = 1061
+    Top = 208
     Width = 20
     Height = 100
     Anchors = [akLeft, akTop, akRight]
@@ -232,8 +233,8 @@ object Form1: TForm1
     Transparent = True
   end
   object leftPaddle: TImage
-    Left = 0
-    Top = 0
+    Left = 24
+    Top = 192
     Width = 20
     Height = 100
     AutoSize = True
@@ -431,8 +432,8 @@ object Form1: TForm1
     Transparent = True
   end
   object ball: TImage
-    Left = 568
-    Top = 256
+    Left = 48
+    Top = 160
     Width = 32
     Height = 32
     AutoSize = True
@@ -565,5 +566,11 @@ object Form1: TForm1
     OnTimer = leftUpTimer
     Left = 40
     Top = 16
+  end
+  object ballTimer: TTimer
+    Interval = 40
+    OnTimer = ballTimerTimer
+    Left = 472
+    Top = 168
   end
 end
