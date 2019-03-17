@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 105
-  Top = 135
+  Left = 170
+  Top = 103
   Width = 1239
   Height = 611
   Caption = 'PingPong by Daniel Laba'
@@ -432,8 +432,8 @@ object Form1: TForm1
     Transparent = True
   end
   object ball: TImage
-    Left = 48
-    Top = 160
+    Left = 968
+    Top = 216
     Width = 32
     Height = 32
     AutoSize = True
@@ -539,19 +539,52 @@ object Form1: TForm1
       FFFF}
     Transparent = True
   end
+  object welcome: TStaticText
+    Left = 424
+    Top = 104
+    Width = 58
+    Height = 46
+    Alignment = taCenter
+    Caption = 'Test'
+    Color = clScrollBar
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'Tempus Sans ITC'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 0
+  end
+  object welcomeButton: TButton
+    Left = 496
+    Top = 400
+    Width = 177
+    Height = 49
+    Cursor = crHandPoint
+    Caption = 'Rozpocznij gr'#281
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = welcomeButtonClick
+  end
   object rightDown: TTimer
     Enabled = False
     Interval = 20
     OnTimer = rightDownTimerTimer
-    Left = 768
-    Top = 112
+    Left = 1088
+    Top = 64
   end
   object rightUp: TTimer
     Enabled = False
     Interval = 20
     OnTimer = rightUpTimerTimer
-    Left = 712
-    Top = 104
+    Left = 1008
+    Top = 56
   end
   object leftDown: TTimer
     Enabled = False
@@ -570,7 +603,7 @@ object Form1: TForm1
   object ballTimer: TTimer
     Interval = 40
     OnTimer = ballTimerTimer
-    Left = 472
-    Top = 168
+    Left = 576
+    Top = 240
   end
 end

@@ -53,10 +53,11 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
-        leftPaddle -> Top = 150;
-        leftPaddle -> Left = 16;
-        rightPaddle -> Top = 150;
-        rightPaddle -> Left = Form1 -> Width - 52;
+
+
+        welcome->Caption = " Zagrajmy w Ping Ponga! ";
+
+        ballTimer->Enabled = false;
 
 }
 //---------------------------------------------------------------------------
@@ -99,14 +100,39 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
         ball -> Left + ball -> Width >= background -> Left + background -> Width)
         {
                 ballTimer -> Enabled = false;
-                ball -> Visible = false;
+                //ball -> Visible = false;
+                welcome->Visible = true;
+                welcomeButton->Visible = true;
+
                 
-        } else if (ball->Top > leftPaddle->Top &&
+        } else if (ball->Top > leftPaddle->Top - ball->Top + 5 &&
                 ball->Top + ball->Height < leftPaddle->Top + leftPaddle->Height &&
                 ball->Left < leftPaddle->Left + leftPaddle->Width )
         {
                if( x<0) x = -x;
+        } else if (ball->Top > rightPaddle->Top - ball->Top + 5 &&
+                ball->Top + ball->Height < rightPaddle->Top + rightPaddle->Height &&
+                ball->Left + ball->Width > rightPaddle->Left )
+        {
+               if( x>0) x = -x;
         }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::welcomeButtonClick(TObject *Sender)
+{
+        leftPaddle -> Top = 150;
+        leftPaddle -> Left = 16;
+        rightPaddle -> Top = 150;
+        rightPaddle -> Left = Form1 -> Width - 52;
+        ball->Top = 304;
+        ball->Left = 584;
+        welcome->Visible = false;
+
+        ballTimer->Enabled = true;
+        welcomeButton->Visible = false;
+
+
 }
 //---------------------------------------------------------------------------
 

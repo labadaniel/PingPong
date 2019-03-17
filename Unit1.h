@@ -22,6 +22,8 @@ __published:	// IDE-managed Components
         TTimer *leftUp;
         TImage *ball;
         TTimer *ballTimer;
+        TStaticText *welcome;
+        TButton *welcomeButton;
         void __fastcall rightUpTimerTimer(TObject *Sender);
         void __fastcall rightDownTimerTimer(TObject *Sender);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
@@ -33,6 +35,8 @@ __published:	// IDE-managed Components
         void __fastcall leftDownTimer(TObject *Sender);
         void __fastcall leftUpTimer(TObject *Sender);
         void __fastcall ballTimerTimer(TObject *Sender);
+        void __fastcall welcomeButtonClick(TObject *Sender);
+        
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

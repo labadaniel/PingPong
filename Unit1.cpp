@@ -26,7 +26,7 @@ void __fastcall TForm1::rightUpTimerTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::rightDownTimerTimer(TObject *Sender)
 {
-        if(rightPaddle -> Top + 110 < background -> Height)
+        if(rightPaddle -> Top + 99 < background -> Height)
                 rightPaddle -> Top += 10;
 }
 //---------------------------------------------------------------------------
@@ -53,25 +53,39 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
+        ball->Visible = true;
         leftPaddle -> Top = 150;
         leftPaddle -> Left = 16;
         rightPaddle -> Top = 150;
         rightPaddle -> Left = Form1 -> Width - 52;
+        ball->Top = background->Height / 2 - ball->Height / 2;
+        ball->Left = background->Width / 2 - ball->Width / 2;
+
+        welcome->Caption = " Zagrajmy w Ping Ponga! ";
+        welcome->Top = background->Height *0.15;
+        welcome->Left = background->Width / 2 - welcome->Width / 2;
+
+        welcomeButton->Top = background->Height *0.75;
+        welcomeButton->Left = background->Width / 2 - welcomeButton->Width / 2;
+
+        ballTimer->Enabled = false;
 
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormResize(TObject *Sender)
 {
-        leftPaddle -> Top = 150;
+        /*leftPaddle -> Top = 150;
         leftPaddle -> Left = 16;
         rightPaddle -> Top = 150;
-        rightPaddle -> Left = Form1 -> Width - 52;
+        rightPaddle -> Left = Form1 -> Width - 52; */
+
+        Form1->FormCreate(Form1);
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::leftDownTimer(TObject *Sender)
 {
-        if(leftPaddle -> Top + 110 <= background -> Height)
+        if(leftPaddle -> Top + 99 < background -> Height)
                 leftPaddle -> Top += 10;
 }
 //---------------------------------------------------------------------------
@@ -100,19 +114,37 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
         {
                 ballTimer -> Enabled = false;
                 ball -> Visible = false;
-                
-        } else if (ball->Top > leftPaddle->Top - ball->Top + 5 &&
+                welcome->Visible = true;
+                welcomeButton->Visible = true;
+
+
+        } else if (ball->Top > leftPaddle->Top &&
                 ball->Top + ball->Height < leftPaddle->Top + leftPaddle->Height &&
-                ball->Left < leftPaddle->Left + leftPaddle->Width )
+                ball->Left <= leftPaddle->Left + leftPaddle->Width )
         {
                if( x<0) x = -x;
-        } else if (ball->Top > rightPaddle->Top - ball->Top + 5 &&
+        } else if (ball->Top > rightPaddle->Top &&
                 ball->Top + ball->Height < rightPaddle->Top + rightPaddle->Height &&
-                ball->Left + ball->Width > rightPaddle->Left )
+                ball->Left + ball->Width >= rightPaddle->Left )
         {
                if( x>0) x = -x;
         }
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TForm1::welcomeButtonClick(TObject *Sender)
+{
+
+        ball->Visible = true;
+        welcome->Visible = false;
+
+        ballTimer->Enabled = true;
+        welcomeButton->Visible = false;
+
+
+}
+//---------------------------------------------------------------------------
+
+
 
 
