@@ -608,6 +608,25 @@ object Form1: TForm1
     TabOrder = 3
     OnClick = newGameClick
   end
+  object Bounces: TStaticText
+    Left = 424
+    Top = 240
+    Width = 241
+    Height = 46
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Test'
+    Color = clScrollBar
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'Tempus Sans ITC'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 4
+    Visible = False
+  end
   object rightDown: TTimer
     Enabled = False
     Interval = 20
@@ -639,7 +658,7 @@ object Form1: TForm1
   object ballTimer: TTimer
     Interval = 30
     OnTimer = ballTimerTimer
-    Left = 576
-    Top = 240
+    Left = 928
+    Top = 216
   end
 end

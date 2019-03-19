@@ -49,6 +49,7 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 {
         if(Key == VK_UP) rightUp -> Enabled = false;
         if(Key == VK_DOWN) rightDown -> Enabled = false;
+
         if(Key == 'A') leftUp -> Enabled = false;
         if(Key == 'Z') leftDown -> Enabled = false;
 }
@@ -57,29 +58,30 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 {
         leftPoints = 0;
         rightPoints = 0;
+
         ball->Visible = true;
+        ballTimer->Enabled = false;
+        ball->Top = background->Height / 2 - ball->Height / 2;
+        ball->Left = background->Width / 2 - ball->Width / 2;
+
         leftPaddle -> Top = 150;
         leftPaddle -> Left = 16;
         rightPaddle -> Top = 150;
         rightPaddle -> Left = Form1 -> Width - 52;
-        ball->Top = background->Height / 2 - ball->Height / 2;
-        ball->Left = background->Width / 2 - ball->Width / 2;
 
         welcome->Caption = " Zagrajmy w Ping Ponga! ";
         welcome->Top = background->Height *0.15;
         welcome->Left = background->Width / 2 - welcome->Width / 2;
 
-        Points->Caption = "";
-        Points->Top = welcome->Top + welcome->Height + 30;
-        Points->Left = background->Width / 2 - welcome->Width / 2;
         Points->Visible = false;
 
         nextGame->Top = background->Height *0.75;
         nextGame->Left = background->Width / 2 - nextGame->Width / 2;
-
         nextGame->Visible = false;
 
-        ballTimer->Enabled = false;
+        newGame->Top = background->Height *0.6;
+        newGame->Left = background->Width / 2 - nextGame->Width / 2;
+        newGame->Visible = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormResize(TObject *Sender)
@@ -119,10 +121,10 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
                 if(ball -> Left < background -> Left)
                 {
                         rightPoints++;
-                        welcome->Caption = " Punkt dla gracza Prawego >>>";
+                        welcome->Caption = " Punkt dla gracza Prawego >>> ";
                         Points->Visible = true;
                         Points->Left =  welcome->Left;
-                        Points->Width = 350 + Points->Left;
+                        Points->Width = welcome->Width;
                         Points->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
                 }
                 if(ball -> Left + ball -> Width > background -> Left + background -> Width)
@@ -130,8 +132,8 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
                         leftPoints++;
                         welcome->Caption = " <<< Punkt dla gracza Lewego ";
                         Points->Visible = true;
-                        Points->Left = welcome->Left;
-                        Points->Width = 350 + Points->Left;
+                        Points->Left =  welcome->Left;
+                        Points->Width = welcome->Width;
                         Points->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
                 }
                 ballTimer -> Enabled = false;
