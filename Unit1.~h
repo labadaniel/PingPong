@@ -23,7 +23,9 @@ __published:	// IDE-managed Components
         TImage *ball;
         TTimer *ballTimer;
         TStaticText *welcome;
-        TButton *welcomeButton;
+        TButton *nextGame;
+        TStaticText *Points;
+        TButton *newGame;
         void __fastcall rightUpTimerTimer(TObject *Sender);
         void __fastcall rightDownTimerTimer(TObject *Sender);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
@@ -35,7 +37,8 @@ __published:	// IDE-managed Components
         void __fastcall leftDownTimer(TObject *Sender);
         void __fastcall leftUpTimer(TObject *Sender);
         void __fastcall ballTimerTimer(TObject *Sender);
-        void __fastcall welcomeButtonClick(TObject *Sender);
+        void __fastcall nextGameClick(TObject *Sender);
+        void __fastcall newGameClick(TObject *Sender);
         
 private:	// User declarations
 public:		// User declarations
