@@ -11,6 +11,8 @@ TForm1 *Form1;
 
 int x = -10;
 int y = -10;
+int leftPoints = 0;
+int rightPoints = 0;
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
@@ -26,7 +28,7 @@ void __fastcall TForm1::rightUpTimerTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::rightDownTimerTimer(TObject *Sender)
 {
-        if(rightPaddle -> Top + 110 < background -> Height)
+        if(rightPaddle -> Top + 99 < background -> Height)
                 rightPaddle -> Top += 10;
 }
 //---------------------------------------------------------------------------
@@ -47,31 +49,50 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 {
         if(Key == VK_UP) rightUp -> Enabled = false;
         if(Key == VK_DOWN) rightDown -> Enabled = false;
+
         if(Key == 'A') leftUp -> Enabled = false;
         if(Key == 'Z') leftDown -> Enabled = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
+        leftPoints = 0;
+        rightPoints = 0;
+
+        ball->Visible = true;
+        ballTimer->Enabled = false;
+        ball->Top = background->Height / 2 - ball->Height / 2;
+        ball->Left = background->Width / 2 - ball->Width / 2;
+
         leftPaddle -> Top = 150;
         leftPaddle -> Left = 16;
         rightPaddle -> Top = 150;
         rightPaddle -> Left = Form1 -> Width - 52;
 
+        welcome->Caption = " Zagrajmy w Ping Ponga! ";
+        welcome->Top = background->Height *0.15;
+        welcome->Left = background->Width / 2 - welcome->Width / 2;
+
+        Points->Visible = false;
+
+        nextGame->Top = background->Height *0.75;
+        nextGame->Left = background->Width / 2 - nextGame->Width / 2;
+        nextGame->Visible = false;
+
+        newGame->Top = background->Height *0.6;
+        newGame->Left = background->Width / 2 - nextGame->Width / 2;
+        newGame->Visible = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormResize(TObject *Sender)
 {
-        leftPaddle -> Top = 150;
-        leftPaddle -> Left = 16;
-        rightPaddle -> Top = 150;
-        rightPaddle -> Left = Form1 -> Width - 52;
+        Form1->FormCreate(Form1);
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::leftDownTimer(TObject *Sender)
 {
-        if(leftPaddle -> Top + 110 <= background -> Height)
+        if(leftPaddle -> Top + 99 < background -> Height)
                 leftPaddle -> Top += 10;
 }
 //---------------------------------------------------------------------------
@@ -94,25 +115,81 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
         if (ball -> Top + ball -> Height + 10 >=  background -> Height) y = -y;
 
         //fail
-
         if (ball -> Left <= background -> Left ||
         ball -> Left + ball -> Width >= background -> Left + background -> Width)
         {
+                if(ball -> Left < background -> Left)
+                {
+                        rightPoints++;
+                        welcome->Caption = " Punkt dla gracza Prawego >>> ";
+                        Points->Visible = true;
+                        Points->Left =  welcome->Left;
+                        Points->Width = welcome->Width;
+                        Points->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
+                }
+                if(ball -> Left + ball -> Width > background -> Left + background -> Width)
+                {
+                        leftPoints++;
+                        welcome->Caption = " <<< Punkt dla gracza Lewego ";
+                        Points->Visible = true;
+                        Points->Left =  welcome->Left;
+                        Points->Width = welcome->Width;
+                        Points->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
+                }
                 ballTimer -> Enabled = false;
                 ball -> Visible = false;
-                
-        } else if (ball->Top > leftPaddle->Top - ball->Top + 5 &&
+                welcome->Visible = true;
+                nextGame->Visible = true;
+                newGame->Visible = true;
+
+        } else if (ball->Top > leftPaddle->Top &&
                 ball->Top + ball->Height < leftPaddle->Top + leftPaddle->Height &&
-                ball->Left < leftPaddle->Left + leftPaddle->Width )
+                ball->Left <= leftPaddle->Left + leftPaddle->Width )
         {
                if( x<0) x = -x;
-        } else if (ball->Top > rightPaddle->Top - ball->Top + 5 &&
+
+        } else if (ball->Top > rightPaddle->Top &&
                 ball->Top + ball->Height < rightPaddle->Top + rightPaddle->Height &&
-                ball->Left + ball->Width > rightPaddle->Left )
+                ball->Left + ball->Width >= rightPaddle->Left )
         {
                if( x>0) x = -x;
         }
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TForm1::nextGameClick(TObject *Sender)
+{
+        newGame->Visible = false;
+        ball->Top = background->Height / 2 - ball->Height / 2;
+        ball->Left = background->Width / 2 - ball->Width / 2;
+
+        ball->Visible = true;
+        welcome->Visible = false;
+
+        ballTimer->Enabled = true;
+        nextGame->Visible = false;
+
+        Points->Visible = false;
+
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::newGameClick(TObject *Sender)
+{
+        leftPoints = 0;
+        rightPoints = 0;
+        ball->Top = background->Height / 2 - ball->Height / 2;
+        ball->Left = background->Width / 2 - ball->Width / 2;
+
+        ball->Visible = true;
+        welcome->Visible = false;
+
+        ballTimer->Enabled = true;
+        newGame->Visible = false;
+        nextGame->Visible = false;
+
+        Points->Visible = false;
+}
+//---------------------------------------------------------------------------
 

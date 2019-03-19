@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 105
-  Top = 135
-  Width = 1239
-  Height = 611
+  Left = 217
+  Top = 181
+  Width = 1182
+  Height = 569
   Caption = 'PingPong by Daniel Laba'
   Color = clGray
   UseDockManager = True
@@ -20,15 +20,15 @@ object Form1: TForm1
   OnKeyUp = FormKeyUp
   OnResize = FormResize
   DesignSize = (
-    1223
-    572)
+    1166
+    530)
   PixelsPerInch = 96
   TextHeight = 13
   object background: TShape
     Left = 0
     Top = 0
-    Width = 1223
-    Height = 572
+    Width = 1166
+    Height = 530
     Align = alClient
     Brush.Color = clGray
   end
@@ -234,7 +234,7 @@ object Form1: TForm1
   end
   object leftPaddle: TImage
     Left = 24
-    Top = 192
+    Top = 144
     Width = 20
     Height = 100
     AutoSize = True
@@ -432,8 +432,8 @@ object Form1: TForm1
     Transparent = True
   end
   object ball: TImage
-    Left = 48
-    Top = 160
+    Left = 968
+    Top = 216
     Width = 32
     Height = 32
     AutoSize = True
@@ -539,19 +539,88 @@ object Form1: TForm1
       FFFF}
     Transparent = True
   end
+  object welcome: TStaticText
+    Left = 424
+    Top = 104
+    Width = 400
+    Height = 46
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Test'
+    Color = clScrollBar
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'Tempus Sans ITC'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 0
+  end
+  object nextGame: TButton
+    Left = 496
+    Top = 400
+    Width = 177
+    Height = 49
+    Cursor = crHandPoint
+    Caption = 'Nast'#281'pna Runda'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = nextGameClick
+  end
+  object Points: TStaticText
+    Left = 424
+    Top = 176
+    Width = 241
+    Height = 46
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Test'
+    Color = clScrollBar
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'Tempus Sans ITC'
+    Font.Style = []
+    ParentColor = False
+    ParentFont = False
+    TabOrder = 2
+    Visible = False
+  end
+  object newGame: TButton
+    Left = 496
+    Top = 312
+    Width = 177
+    Height = 49
+    Cursor = crHandPoint
+    Caption = 'Nowa Gra'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    OnClick = newGameClick
+  end
   object rightDown: TTimer
     Enabled = False
     Interval = 20
     OnTimer = rightDownTimerTimer
-    Left = 768
-    Top = 112
+    Left = 1088
+    Top = 64
   end
   object rightUp: TTimer
     Enabled = False
     Interval = 20
     OnTimer = rightUpTimerTimer
-    Left = 712
-    Top = 104
+    Left = 1008
+    Top = 56
   end
   object leftDown: TTimer
     Enabled = False
@@ -568,9 +637,9 @@ object Form1: TForm1
     Top = 16
   end
   object ballTimer: TTimer
-    Interval = 40
+    Interval = 30
     OnTimer = ballTimerTimer
-    Left = 472
-    Top = 168
+    Left = 576
+    Top = 240
   end
 end
