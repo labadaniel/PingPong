@@ -19,6 +19,7 @@ int bounces = 0;
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
 {
+
         leftPaddle -> Top = 150;
         leftPaddle -> Left = 16;
         rightPaddle -> Top = 150;
@@ -183,6 +184,7 @@ void __fastcall TForm1::nextGameClick(TObject *Sender)
         nextGame->Visible = false;
 
         Points->Visible = false;
+        Bounces->Visible = false;
 
 
 }
@@ -190,20 +192,24 @@ void __fastcall TForm1::nextGameClick(TObject *Sender)
 
 void __fastcall TForm1::newGameClick(TObject *Sender)
 {
-        leftPoints = 0;
-        rightPoints = 0;
-        bounces = 0;
-        ball->Top = background->Height / 2 - ball->Height / 2;
-        ball->Left = background->Width / 2 - ball->Width / 2;
+        if(Application->MessageBox("Czy napewno rozpoczac od pocz¹tku?", "PotwierdŸ...", MB_YESNO) == IDYES)
+        {
+                leftPoints = 0;
+                rightPoints = 0;
+                bounces = 0;
+                ball->Top = background->Height / 2 - ball->Height / 2;
+                ball->Left = background->Width / 2 - ball->Width / 2;
 
-        ball->Visible = true;
-        welcome->Visible = false;
+                ball->Visible = true;
+                welcome->Visible = false;
 
-        ballTimer->Enabled = true;
-        newGame->Visible = false;
-        nextGame->Visible = false;
+                ballTimer->Enabled = true;
+                newGame->Visible = false;
+                nextGame->Visible = false;
 
-        Points->Visible = false;
+                Points->Visible = false;
+                Bounces->Visible = false;
+        }
 }
 //---------------------------------------------------------------------------
 
