@@ -13,11 +13,16 @@ int x = -10;
 int y = -10;
 int leftPoints = 0;
 int rightPoints = 0;
+int bounces = 0;
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
 {
+        leftPaddle -> Top = 150;
+        leftPaddle -> Left = 16;
+        rightPaddle -> Top = 150;
+        rightPaddle -> Left = Form1 -> Width - 52;
 }
 //---------------------------------------------------------------------------
 
@@ -56,18 +61,10 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
-        leftPoints = 0;
-        rightPoints = 0;
-
         ball->Visible = true;
         ballTimer->Enabled = false;
         ball->Top = background->Height / 2 - ball->Height / 2;
         ball->Left = background->Width / 2 - ball->Width / 2;
-
-        leftPaddle -> Top = 150;
-        leftPaddle -> Left = 16;
-        rightPaddle -> Top = 150;
-        rightPaddle -> Left = Form1 -> Width - 52;
 
         welcome->Caption = " Zagrajmy w Ping Ponga! ";
         welcome->Top = background->Height *0.15;
@@ -122,19 +119,32 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
                 {
                         rightPoints++;
                         welcome->Caption = " Punkt dla gracza Prawego >>> ";
+
                         Points->Visible = true;
                         Points->Left =  welcome->Left;
                         Points->Width = welcome->Width;
                         Points->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
+
+                        Bounces->Visible = true;
+                        Bounces->Left =  welcome->Left;
+                        Bounces->Width = welcome->Width;
+                        Bounces->Caption = "Ilosc odbic pilka: " + IntToStr(bounces);
+
                 }
                 if(ball -> Left + ball -> Width > background -> Left + background -> Width)
                 {
                         leftPoints++;
                         welcome->Caption = " <<< Punkt dla gracza Lewego ";
+
                         Points->Visible = true;
                         Points->Left =  welcome->Left;
                         Points->Width = welcome->Width;
                         Points->Caption = IntToStr(leftPoints) + " : " + IntToStr(rightPoints);
+
+                        Bounces->Visible = true;
+                        Bounces->Left =  welcome->Left;
+                        Bounces->Width = welcome->Width;
+                        Bounces->Caption = "Ilosc odbic pilka: " + IntToStr(bounces);
                 }
                 ballTimer -> Enabled = false;
                 ball -> Visible = false;
@@ -147,18 +157,21 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
                 ball->Left <= leftPaddle->Left + leftPaddle->Width )
         {
                if( x<0) x = -x;
+               bounces++;
 
         } else if (ball->Top > rightPaddle->Top &&
                 ball->Top + ball->Height < rightPaddle->Top + rightPaddle->Height &&
                 ball->Left + ball->Width >= rightPaddle->Left )
         {
                if( x>0) x = -x;
+               bounces++;
         }
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::nextGameClick(TObject *Sender)
 {
+        bounces = 0;
         newGame->Visible = false;
         ball->Top = background->Height / 2 - ball->Height / 2;
         ball->Left = background->Width / 2 - ball->Width / 2;
@@ -179,6 +192,7 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
 {
         leftPoints = 0;
         rightPoints = 0;
+        bounces = 0;
         ball->Top = background->Height / 2 - ball->Height / 2;
         ball->Left = background->Width / 2 - ball->Width / 2;
 
@@ -192,4 +206,6 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
         Points->Visible = false;
 }
 //---------------------------------------------------------------------------
+
+
 

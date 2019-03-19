@@ -542,9 +542,10 @@ object Form1: TForm1
   object welcome: TStaticText
     Left = 424
     Top = 104
-    Width = 350
+    Width = 400
     Height = 46
     Alignment = taCenter
+    AutoSize = False
     Caption = 'Test'
     Color = clScrollBar
     Font.Charset = ANSI_CHARSET
@@ -562,7 +563,7 @@ object Form1: TForm1
     Width = 177
     Height = 49
     Cursor = crHandPoint
-    Caption = 'Nastepna Runda'
+    Caption = 'Nast'#281'pna Runda'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -20
@@ -575,9 +576,10 @@ object Form1: TForm1
   object Points: TStaticText
     Left = 424
     Top = 176
-    Width = 350
+    Width = 241
     Height = 46
     Alignment = taCenter
+    AutoSize = False
     Caption = 'Test'
     Color = clScrollBar
     Font.Charset = ANSI_CHARSET
