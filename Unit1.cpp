@@ -19,11 +19,23 @@ int bounces = 0;
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
 {
+        Application->MessageBox(    "Witaj w PingPong.\n"
+                        "\n"
+                        "Lewy gracz steruje wciskaj¹c klawisze A oraz Z.\n"
+                        "Prawy gracz steruje wciskaj¹c strza³ki do góry i w dó³.\n"
+                        "\n"
+                        "Dla urozmaicenia zabawy:\n"
+                        "Kiedy odbijesz pi³kê na srodku paletki, wówczas zmienisz jej k¹t odbicia i pi³ka przyspieszy.\n"
+                        "Im d³u¿ej odbijasz, tym pi³ka szybciej przemieszcza siê.\n"
+                        "Mo¿esz dowolnie zmieniac pole gry.\n"
+                        "\n"
+                        "Mi³ej zabawy!", "PingPong", MB_OK);
 
         leftPaddle -> Top = 150;
         leftPaddle -> Left = 16;
         rightPaddle -> Top = 150;
         rightPaddle -> Left = Form1 -> Width - 52;
+
 }
 //---------------------------------------------------------------------------
 
@@ -62,6 +74,7 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
+
         ball->Visible = true;
         ballTimer->Enabled = false;
         ball->Top = background->Height / 2 - ball->Height / 2;
@@ -157,8 +170,12 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
                 ball->Top + ball->Height < leftPaddle->Top + leftPaddle->Height &&
                 ball->Left <= leftPaddle->Left + leftPaddle->Width )
         {
-               if( x<0) x = -x;
-               bounces++;
+               if( x<0)
+               {
+
+                        x = -x;
+                        bounces++;
+               }
 
         } else if (ball->Top > rightPaddle->Top &&
                 ball->Top + ball->Height < rightPaddle->Top + rightPaddle->Height &&
