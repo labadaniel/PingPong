@@ -27,6 +27,7 @@ __published:	// IDE-managed Components
         TStaticText *Points;
         TButton *newGame;
         TStaticText *Bounces;
+        TButton *startGame;
         void __fastcall rightUpTimerTimer(TObject *Sender);
         void __fastcall rightDownTimerTimer(TObject *Sender);
         void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
@@ -40,6 +41,7 @@ __published:	// IDE-managed Components
         void __fastcall ballTimerTimer(TObject *Sender);
         void __fastcall nextGameClick(TObject *Sender);
         void __fastcall newGameClick(TObject *Sender);
+        void __fastcall startGameClick(TObject *Sender);
         
 private:	// User declarations
 public:		// User declarations
