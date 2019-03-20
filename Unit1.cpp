@@ -14,12 +14,13 @@ int y = -10;
 int leftPoints = 0;
 int rightPoints = 0;
 int bounces = 0;
+bool accelerate = true;
 
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
 {
-        Application->MessageBox(    "Witaj w PingPong.\n"
+        ShowMessage(    "Witaj w PingPong.\n"
                         "\n"
                         "Lewy gracz steruje wciskaj¹c klawisze A oraz Z.\n"
                         "Prawy gracz steruje wciskaj¹c strza³ki do góry i w dó³.\n"
@@ -29,12 +30,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
                         "Im d³u¿ej odbijasz, tym pi³ka szybciej przemieszcza siê.\n"
                         "Mo¿esz dowolnie zmieniac pole gry.\n"
                         "\n"
-                        "Mi³ej zabawy!", "PingPong", MB_OK);
-
-        leftPaddle -> Top = 150;
-        leftPaddle -> Left = 16;
-        rightPaddle -> Top = 150;
-        rightPaddle -> Left = Form1 -> Width - 52;
+                        "Mi³ej zabawy!");
 
 }
 //---------------------------------------------------------------------------
@@ -46,7 +42,7 @@ void __fastcall TForm1::rightUpTimerTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TForm1::rightDownTimerTimer(TObject *Sender)
 {
-        if(rightPaddle -> Top + 99 < background -> Height)
+        if(rightPaddle -> Top + 199 < background -> Height)
                 rightPaddle -> Top += 10;
 }
 //---------------------------------------------------------------------------
@@ -75,6 +71,11 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
 
+        leftPaddle -> Top = 150;
+        leftPaddle -> Left = 16;
+        rightPaddle -> Top = 150;
+        rightPaddle -> Left = Form1 -> Width - 52;
+
         ball->Visible = true;
         ballTimer->Enabled = false;
         ball->Top = background->Height / 2 - ball->Height / 2;
@@ -85,6 +86,7 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
         welcome->Left = background->Width / 2 - welcome->Width / 2;
 
         Points->Visible = false;
+        Bounces->Visible = false;
 
         nextGame->Top = background->Height *0.75;
         nextGame->Left = background->Width / 2 - nextGame->Width / 2;
@@ -92,7 +94,11 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 
         newGame->Top = background->Height *0.6;
         newGame->Left = background->Width / 2 - nextGame->Width / 2;
-        newGame->Visible = true;
+        newGame->Visible = false;
+
+        startGame->Top = background->Height *0.6;
+        startGame->Left = background->Width / 2 - nextGame->Width / 2;
+        startGame->Visible = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FormResize(TObject *Sender)
@@ -103,7 +109,7 @@ void __fastcall TForm1::FormResize(TObject *Sender)
 
 void __fastcall TForm1::leftDownTimer(TObject *Sender)
 {
-        if(leftPaddle -> Top + 99 < background -> Height)
+        if(leftPaddle -> Top + 199 < background -> Height)
                 leftPaddle -> Top += 10;
 }
 //---------------------------------------------------------------------------
@@ -143,6 +149,9 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
                         Bounces->Left =  welcome->Left;
                         Bounces->Width = welcome->Width;
                         Bounces->Caption = "Ilosc odbic pilka: " + IntToStr(bounces);
+                        x = -10;
+                        y = -10;
+                        accelerate = true;
 
                 }
                 if(ball -> Left + ball -> Width > background -> Left + background -> Width)
@@ -159,6 +168,9 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
                         Bounces->Left =  welcome->Left;
                         Bounces->Width = welcome->Width;
                         Bounces->Caption = "Ilosc odbic pilka: " + IntToStr(bounces);
+                        x = 10;
+                        y = 10;
+                        accelerate = true;
                 }
                 ballTimer -> Enabled = false;
                 ball -> Visible = false;
@@ -172,17 +184,39 @@ void __fastcall TForm1::ballTimerTimer(TObject *Sender)
         {
                if( x<0)
                {
-
-                        x = -x;
-                        bounces++;
+                        if(ball->Top > (leftPaddle->Top  + leftPaddle->Height *0.25)
+                        && ball->Top + ball->Height < (leftPaddle->Top + leftPaddle->Height * 0.75)
+                        && accelerate == true)
+                        {
+                                x = -x * 2.5;
+                                bounces++;
+                                accelerate = false;
+                                y = y * 2;
+                        }else{
+                                x = -x;
+                                bounces++;
+                        }
                }
 
         } else if (ball->Top > rightPaddle->Top &&
                 ball->Top + ball->Height < rightPaddle->Top + rightPaddle->Height &&
                 ball->Left + ball->Width >= rightPaddle->Left )
         {
-               if( x>0) x = -x;
-               bounces++;
+               if( x>0)
+               {
+                        if(ball->Top > (rightPaddle->Top  + rightPaddle->Height *0.25)
+                        && ball->Top + ball->Height < (rightPaddle->Top + rightPaddle->Height * 0.75)
+                        && accelerate == true)
+                        {
+                                x = -x * 2.5;
+                                bounces++;
+                                accelerate = false;
+                                y = y * 2;
+                        }else{
+                                x = -x;
+                                bounces++;
+                        }
+               }
         }
 }
 //---------------------------------------------------------------------------
@@ -202,8 +236,6 @@ void __fastcall TForm1::nextGameClick(TObject *Sender)
 
         Points->Visible = false;
         Bounces->Visible = false;
-
-
 }
 //---------------------------------------------------------------------------
 
@@ -230,5 +262,28 @@ void __fastcall TForm1::newGameClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+
+void __fastcall TForm1::startGameClick(TObject *Sender)
+{
+      leftPoints = 0;
+                rightPoints = 0;
+                bounces = 0;
+                ball->Top = background->Height / 2 - ball->Height / 2;
+                ball->Left = background->Width / 2 - ball->Width / 2;
+
+                ball->Visible = true;
+                welcome->Visible = false;
+
+                ballTimer->Enabled = true;
+                newGame->Visible = false;
+                nextGame->Visible = false;
+                startGame->Visible = false;
+
+
+                Points->Visible = false;
+                Bounces->Visible = false;
+}
+//---------------------------------------------------------------------------
 
 
